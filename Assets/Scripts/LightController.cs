@@ -80,8 +80,10 @@ else
 
         }
 
+
         float darknessAmount = 1f - globalLight.intensity;
-        colorAdjustments.colorFilter.value = Color.Lerp(fullLightColor, darkLightColor, darknessAmount);
+        //slowly fades the light of the volume from white to a pale blue to help make the scene more dramatic using a lerp to fade between the two colors.
+        colorAdjustments.colorFilter.value = Color.Lerp(fullLightColor, darkLightColor, darknessAmount); 
 
        
 
