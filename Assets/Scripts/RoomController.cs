@@ -2,34 +2,61 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class RoomController : MonoBehaviour
-
 {
     public int currentRoomState = 0; // Which of the rooms is currently being shown.
     public bool roomChangeTriggered = false; // has the threshold for room changing been hit?
-    public Light2D roomLightLevel; // reads the current roomlight in the scene.
-    public float roomChangeThreshold = 0.2f; //stores the light intensity at which a room change should happen.
+    public Light2D lampLightLevel; // reads the current roomlight in the scene.
 
+    public float lampScaleChangeThreshold = 2f; //stores the light intensity at which a room change should happen.
+
+    public GameObject[] roomStates;
+
+    public LightController lightController;
+
+
+    //private float previousLightRatio;
+    //private float roomChangeRatio;
+
+    private float previousLampScale;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        previousLampScale = lampLightLevel.transform.localScale.x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (roomLightLevel.intensity <= roomChangeThreshold && roomChangeTriggered == false)
+
+
+        float currentLampScale = lampLightLevel.transform.localScale.x;
+
+        if (lightController.isRestoringLight == false && previousLampScale > lampScaleChangeThreshold && currentLampScale <= lampScaleChangeThreshold)
+            
         {
-            roomChangeTriggered = true;
-            currentRoomState++;
+            if (currentRoomState < roomStates.Length - 1)
+            {
+
+                Debug.Log("ROOM CHANGED | Lamp Scale: " + currentLampScale
+       + " | Threshold: " + lampScaleChangeThreshold
+       + " | Light Ratio: " + lightController.lightRatio);
+
+                roomStates[currentRoomState].SetActive(false);
+
+                currentRoomState++;
+
+                roomStates[currentRoomState].SetActive(true);
+                roomChangeTriggered = true;
+            }
         }
 
-        if (roomLightLevel.intensity > roomChangeThreshold && roomChangeTriggered == true)
+        previousLampScale = currentLampScale;
+
+        if (lightController.lightRatio >= 1f
+     && roomChangeTriggered == true)
         {
             roomChangeTriggered = false;
-
         }
-
     }
 }
