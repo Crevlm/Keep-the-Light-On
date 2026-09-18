@@ -38,9 +38,9 @@ public class RoomController : MonoBehaviour
             if (currentRoomState < roomStates.Length - 1)
             {
 
-                Debug.Log("ROOM CHANGED | Lamp Scale: " + currentLampScale
-       + " | Threshold: " + lampScaleChangeThreshold
-       + " | Light Ratio: " + lightController.lightRatio);
+       //         Debug.Log("ROOM CHANGED | Lamp Scale: " + currentLampScale
+       //+ " | Threshold: " + lampScaleChangeThreshold
+       //+ " | Light Ratio: " + lightController.lightRatio);
 
                 roomStates[currentRoomState].SetActive(false);
 

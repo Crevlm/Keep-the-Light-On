@@ -27,20 +27,17 @@ public class LightController : MonoBehaviour
     
 
 
-    //public float globalLightDimSpeed = 0.25f; // how fast the room light dims
-    //public float globalLightRestoreSpeed = .5f; // how fast the room light restores
-    //public float lampLightShrinkSpeed = .4f; // how fast the light around the lamp shrinks
-    //public float lampLightDimSpeed = .1f; // how fast the lamp light dims
-    //public float lampLightRestoreSpeed = 3f; // how fast the lamp light restores
-
-
     public Color fullLightColor = Color.white;
     public Color darkLightColor;
 
+
+    public NarrativeTextController narrativeTextController;
+
     public void RestoreLight()
     {
+        Debug.Log("RestoreLight was called");
         isRestoringLight = true;
-
+        narrativeTextController.LampRelit();
        
     }
 
@@ -87,46 +84,6 @@ public class LightController : MonoBehaviour
 
 
 
-
-
-            //        if (isRestoringLight)
-            //        {
-            //            globalLight.intensity = Mathf.MoveTowards(globalLight.intensity, 1f, (globalLightRestoreSpeed * Time.deltaTime));
-
-
-
-            //            lampLight.intensity = Mathf.MoveTowards(lampLight.intensity, 1f, (lampLightRestoreSpeed * Time.deltaTime));
-
-            //            lampLight.transform.localScale = new Vector3
-            //                (
-            //                Mathf.MoveTowards(lampLight.transform.localScale.x, 6, (lampLightRestoreSpeed * Time.deltaTime)),
-            //                Mathf.MoveTowards(lampLight.transform.localScale.y, 6, (lampLightRestoreSpeed * Time.deltaTime)), 1
-
-            //                );
-            //            if (globalLight.intensity == 1f && lampLight.intensity == 1f && lampLight.transform.localScale.x == 6 && lampLight.transform.localScale.y == 6)
-            //            {
-            //                isRestoringLight = false; // reset the bool to not restoring once it hits the max levels. 
-            //            }
-            //        }
-
-
-            //else
-            //        {
-            //            //dims the room light over time but makes sure it doesn't go above 1 or below 0. 
-            //            globalLight.intensity = Mathf.Clamp(globalLight.intensity - (globalLightDimSpeed * Time.deltaTime), 0f, 1f);
-
-            //            //dims the intensity of the lamp light over time but makes sure it doesn't go above 1 or below 0. 
-            //            lampLight.intensity = Mathf.Clamp(lampLight.intensity - (lampLightDimSpeed * Time.deltaTime), 0f, 1f);
-
-            //            //shrinks the lamp light scale as time passes but makes sure it doesn't drop below 0. 
-            //            lampLight.transform.localScale = new Vector3
-            //                (
-            //                Mathf.Max(lampLight.transform.localScale.x - (lampLightShrinkSpeed * Time.deltaTime), 0),
-            //                Mathf.Max(lampLight.transform.localScale.y - (lampLightShrinkSpeed * Time.deltaTime), 0),
-            //                1
-            //                );
-
-            //        }
 
 
             float darknessAmount = 1f - globalLight.intensity;
