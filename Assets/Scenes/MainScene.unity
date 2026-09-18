@@ -319,8 +319,8 @@ MonoBehaviour:
   useFadeEffect: 1
   fadeUpDuration: 0.25
   fadeDownDuration: 0.1
-  autoAdvance: 0
-  autoAdvanceDelay: 1
+  autoAdvance: 1
+  autoAdvanceDelay: 2
   typewriterStyle: 1
   lettersPerSecond: 25
   wordsPerSecond: 10
