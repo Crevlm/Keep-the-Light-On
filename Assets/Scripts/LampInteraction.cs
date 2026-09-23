@@ -6,6 +6,8 @@ public class LampInteraction : MonoBehaviour
     Collider2D lampCollider; //Grabs the Polygon Collider from the Lamp Object
     public LightController lightController;
 
+    public AudioSource lampClickSound;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,6 +29,7 @@ public class LampInteraction : MonoBehaviour
             {
                 //Debug.Log("Point overlaps");
                 lightController.RestoreLight();
+                lampClickSound.Play();
             }
         }
 
