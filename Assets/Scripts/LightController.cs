@@ -21,6 +21,9 @@ public class LightController : MonoBehaviour
     public float lightDimSpeed = 1f;
     public float lightRestoreSpeed = .5f;
 
+    public float startDelay = 3f;
+    private float startTimer;
+
     public float maxGlobalLightIntensity = 1f;
     public float maxLampLightIntensity = 1f;
     public float maxLampScale = 6f;
@@ -49,30 +52,43 @@ public class LightController : MonoBehaviour
         //Convert the lamp's starting scale into our normalized 0-1 ratio.
         lightRatio = Mathf.InverseLerp(0f, maxLampScale, lampLight.transform.localScale.x);
 
+        startTimer = startDelay;
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (isRestoringLight)
+        if (startTimer >0)
         {
-            //Move the normalized light value toward full light.
-            lightRatio = Mathf.MoveTowards(lightRatio, 1f, lightRestoreSpeed * Time.deltaTime);
-
-            if (lightRatio >= 1f)
-            {
-                lightRatio = 1f;
-                isRestoringLight = false;
-            }
-
+            startTimer -= Time.deltaTime;
         }
 
         else
         {
-            // Move the normalized light value toward darkness.
-            lightRatio = Mathf.MoveTowards(lightRatio, 0, lightDimSpeed * Time.deltaTime);
+
+            if (isRestoringLight)
+            {
+                //Move the normalized light value toward full light.
+                lightRatio = Mathf.MoveTowards(lightRatio, 1f, lightRestoreSpeed * Time.deltaTime);
+
+                if (lightRatio >= 1f)
+                {
+                    lightRatio = 1f;
+                    isRestoringLight = false;
+                }
+
+            }
+
+            else
+            {
+                // Move the normalized light value toward darkness.
+                lightRatio = Mathf.MoveTowards(lightRatio, 0, lightDimSpeed * Time.deltaTime);
+            }
         }
+
+
 
         //Convert the same 0-1 reation into each light's actual values
 

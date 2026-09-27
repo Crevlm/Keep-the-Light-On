@@ -63,7 +63,7 @@ public class KeepTheLightOnDebugWindow : EditorWindow
 
         EditorGUILayout.Space();
 
-        DrawNarrativeSection();
+    
 
         EditorGUILayout.Space();
 
@@ -229,44 +229,6 @@ public class KeepTheLightOnDebugWindow : EditorWindow
         }
     }
 
-    // --------------------------------------------------
-    // NARRATIVE
-    // --------------------------------------------------
-
-    private void DrawNarrativeSection()
-    {
-        GUILayout.Label("NARRATIVE", EditorStyles.boldLabel);
-
-        if (narrativeController == null)
-        {
-            EditorGUILayout.HelpBox(
-                "NarrativeTextController not found.",
-                MessageType.Warning
-            );
-
-            return;
-        }
-
-        EditorGUILayout.LabelField(
-            "Tired Line Trigger",
-            narrativeController.tiredLineTrigger.ToString()
-        );
-
-        EditorGUILayout.LabelField(
-            "Tired Line Triggered",
-            narrativeController.tiredLineTriggered.ToString()
-        );
-
-        /*
-         * earlyRelightCount is private inside
-         * NarrativeTextController, so this tool intentionally
-         * does not access it yet.
-         *
-         * We can expose it safely later with a public
-         * read-only property without making the variable itself
-         * public.
-         */
-    }
 
     // --------------------------------------------------
     // TESTING CONTROLS
