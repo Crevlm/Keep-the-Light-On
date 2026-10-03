@@ -740,10 +740,6 @@ MonoBehaviour:
   lightController: {fileID: 230922584}
   roomController: {fileID: 688081959}
   dialogueRunner: {fileID: 148579802}
-  earlyRelight1Trigger: 5
-  earlyRelight1Triggered: 0
-  earlyRelight2Trigger: 8
-  earlyRelight2Triggered: 0
 --- !u!1 &196741771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2968,6 +2964,7 @@ MonoBehaviour:
   - {fileID: 756795363}
   - {fileID: 2000158044}
   lightController: {fileID: 230922584}
+  narrativeTextController: {fileID: 148579805}
   stateAmbience:
   - {fileID: 8300000, guid: 4080efbfa762ed34e9905a4de900b73c, type: 3}
   - {fileID: 8300000, guid: 3b9f3f3f2039b9b4aa95628fc38df955, type: 3}

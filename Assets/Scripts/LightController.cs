@@ -38,7 +38,7 @@ public class LightController : MonoBehaviour
 
     public void RestoreLight()
     {
-        Debug.Log("RestoreLight was called");
+        
         isRestoringLight = true;
         narrativeTextController.LampRelit();
        

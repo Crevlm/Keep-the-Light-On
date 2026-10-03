@@ -13,6 +13,7 @@ public class RoomController : MonoBehaviour
     public GameObject[] roomStates;
 
     public LightController lightController;
+    public NarrativeTextController narrativeTextController;
 
 
     // --------------------
@@ -61,15 +62,14 @@ public class RoomController : MonoBehaviour
         {
             if (currentRoomState < roomStates.Length - 1)
             {
-                // Debug.Log("ROOM CHANGED | Lamp Scale: " + currentLampScale
-                // + " | Threshold: " + lampScaleChangeThreshold
-                // + " | Light Ratio: " + lightController.lightRatio);
+                
 
                 roomStates[currentRoomState].SetActive(false);
 
                 currentRoomState++;
 
                 roomStates[currentRoomState].SetActive(true);
+                narrativeTextController.RoomChanged();
 
                 // Crossfade into the new state's ambience
                 if (currentRoomState < stateAmbience.Length)

@@ -1,0 +1,159 @@
+﻿//
+//Light Clicking According to the Array
+//
+
+
+title: EarlyRelight1
+---
+Aren't you getting tired?
+===
+
+title: EarlyRelight2
+---
+I suppose it is a little scary...the 'dark'...
+===
+
+title: EarlyRelight3
+---
+But what truly are you afraid of?
+===
+
+title: EarlyRelight4
+---
+Is it change? 
+===
+
+title: EarlyRelight5
+---
+Is it the dark?
+===
+
+title: EarlyRelight6
+---
+Or is it something bigger? 
+===
+
+title: EarlyRelight7
+---
+What if we just...try?
+===
+
+title: EarlyRelight8
+---
+Please. You have to let go.
+===
+
+//
+// Unique 9 First Darkness Dialogue Points
+//
+
+
+
+title: DarknessLowRelight
+---
+Rarely do things stay the same.
+===
+
+title: DarknessAfterEL1
+---
+It's okay to stop holding on.
+===
+
+title: DarknessAfterEL2
+---
+See, that wasn't so bad.
+===
+
+title: DarknessAfterEL3
+---
+It's okay to face those fears.
+===
+
+title: DarknessAfterEL4
+---
+Change is just a part of life.
+===
+
+title: DarknessAfterEL5
+---
+Sometimes letting go pushes us forward.
+===
+
+title: DarknessAfterEL6
+---
+It may feel scary at first.
+===
+
+title: DarknessAfterEL7
+---
+To grow we must let go.
+===
+
+title: DarknessAfterEL8
+---
+It's okay. You're not alone.
+===
+
+
+//STATE 2
+
+
+
+title: Early_Darkness2
+---
+===
+
+title: Middle_Darkness2
+---
+===
+
+title: Late_Darkness2
+---
+===
+
+//STATE 3
+
+
+
+title: Early_Darkness3
+---
+===
+
+title: Middle_Darkness3
+---
+===
+
+title: Late_Darkness3
+---
+===
+
+
+//STATE 4
+
+
+title: Early_Darkness4
+---
+===
+
+title: Middle_Darkness4
+---
+===
+
+title: Late_Darkness4
+---
+===
+
+// STATE 5 (FINAL)
+
+
+title: Early_Darkness5
+---
+===
+
+title: Middle_Darkness5
+---
+===
+
+title: Late_Darkness5
+---
+===
