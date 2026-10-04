@@ -1,5 +1,5 @@
 ﻿//
-//Light Clicking According to the Array
+// Light Clicking According to the Array
 //
 
 
@@ -20,7 +20,7 @@ But what truly are you afraid of?
 
 title: EarlyRelight4
 ---
-Is it change? 
+Is it change?
 ===
 
 title: EarlyRelight5
@@ -30,7 +30,7 @@ Is it the dark?
 
 title: EarlyRelight6
 ---
-Or is it something bigger? 
+Or is it something bigger?
 ===
 
 title: EarlyRelight7
@@ -43,10 +43,10 @@ title: EarlyRelight8
 Please. You have to let go.
 ===
 
+
 //
 // Unique 9 First Darkness Dialogue Points
 //
-
 
 
 title: DarknessLowRelight
@@ -95,65 +95,93 @@ It's okay. You're not alone.
 ===
 
 
-//STATE 2
-
+// STATE 2
+// The room is still lived in, but things are changing.
+// Early accepts change.
+// Middle is beginning to accept it.
+// Late is still holding tightly.
 
 
 title: Early_Darkness2
 ---
+Things can change without disappearing.
 ===
 
 title: Middle_Darkness2
 ---
+You noticed it too, didn't you?
 ===
 
 title: Late_Darkness2
 ---
+You can't keep everything exactly as it was.
 ===
 
-//STATE 3
 
+// STATE 3
+// Neglect begins to show. Plants are dying.
+// This is the emotional low point before the larger loss becomes visible.
 
 
 title: Early_Darkness3
 ---
+Some things end, even when we care for them.
 ===
 
 title: Middle_Darkness3
 ---
+Holding on can't stop something from changing.
 ===
 
 title: Late_Darkness3
 ---
+You can't keep something alive just by refusing to let it go.
 ===
 
 
-//STATE 4
+// STATE 4
+// Moving boxes. Someone has left.
+// This should be the clearest moment of loss without explicitly explaining it.
 
 
 title: Early_Darkness4
 ---
+You knew this moment would come.
 ===
 
 title: Middle_Darkness4
 ---
+It's different when the space they leave behind is real.
 ===
 
 title: Late_Darkness4
 ---
+I know. You wanted more time.
 ===
 
+
 // STATE 5 (FINAL)
+// Renewal. The room belongs to a life that is continuing.
+// All three paths arrive at acceptance, but with different emotional histories.
 
 
 title: Early_Darkness5
 ---
+Look around.
+
+Something new can grow here.
 ===
 
 title: Middle_Darkness5
 ---
+It still hurts.
+
+But look how much has changed.
 ===
 
 title: Late_Darkness5
 ---
+You let go.
+
+And you're still here.
 ===

@@ -71,7 +71,7 @@ public class NarrativeTextController : MonoBehaviour
         // FIRST DARKNESS ONLY
         if (narrativePath == -1)
         {
-            // Choose the specific first-darkness response.
+            // Play the specific first-darkness response.
             if (narrativeStage == 0)
             {
                 dialogueQueue.Enqueue("DarknessLowRelight");
@@ -109,7 +109,7 @@ public class NarrativeTextController : MonoBehaviour
                 dialogueQueue.Enqueue("DarknessAfterEL8");
             }
 
-            // Lock in the long-term narrative path.
+            // Lock in the long-term path.
             if (narrativeStage <= 2)
             {
                 narrativePath = 0;
@@ -127,13 +127,34 @@ public class NarrativeTextController : MonoBehaviour
             }
         }
 
-        // Preserve EarlyRelight spacing for the next room cycle.
+        // ALL LATER DARKNESS EVENTS
+        else
+        {
+            string nodeName = "";
+
+            if (narrativePath == 0)
+            {
+                nodeName = "Early_Darkness" + roomController.currentRoomState;
+            }
+            else if (narrativePath == 1)
+            {
+                nodeName = "Middle_Darkness" + roomController.currentRoomState;
+            }
+            else if (narrativePath == 2)
+            {
+                nodeName = "Late_Darkness" + roomController.currentRoomState;
+            }
+
+            dialogueQueue.Enqueue(nodeName);
+        }
+
+        // Preserve EarlyRelight spacing.
         if (narrativeStage > 0)
         {
             relightTriggerOffset = earlyRelightTriggers[narrativeStage - 1];
         }
 
-        // Start counting fresh for the next room.
+        // Reset clicks for the new room cycle.
         relightsSinceDarkness = 0;
     }
 
