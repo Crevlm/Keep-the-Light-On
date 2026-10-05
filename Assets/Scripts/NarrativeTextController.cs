@@ -14,12 +14,16 @@ public class NarrativeTextController : MonoBehaviour
     // Tracks which EarlyRelight dialogue comes next.
     private int narrativeStage = 0;
 
-    // Original EarlyRelight pacing.
-    private int[] earlyRelightTriggers = { 5, 8, 12, 15, 18, 21, 24, 30 };
+    // Only prompts started by the runner count toward the darkness response.
+    private int shownNarrativeStage = 0;
 
-    // Offsets the trigger values after a room change so the player
-    // doesn't have to repeat all previous clicks.
-    private int relightTriggerOffset = 0;
+    // Each room has its own finite set of relight responses for the locked path.
+    private int pathRelightStage = 0;
+    private readonly int[] pathRelightTriggers = { 5, 10, 15 };
+    private readonly string[] pathNames = { "Early", "Middle", "Late" };
+
+    // Original EarlyRelight pacing.
+    private int[] earlyRelightTriggers = { 6, 12, 18, 24, 30, 36, 42, 48 };
 
     // Persistent narrative path chosen on the FIRST darkness.
     //
@@ -33,32 +37,65 @@ public class NarrativeTextController : MonoBehaviour
     private Queue<string> dialogueQueue = new Queue<string>();
 
 
+    private bool finalState;
+    private bool endingQueued;
+    private bool wasDialogueRunning;
+    private float nextRelightDialogueTime;
+    public bool IsDialogueIdle => dialogueQueue.Count == 0 && !dialogueRunner.IsDialogueRunning;
+
+    public void PlayEnding()
+    {
+        if (endingQueued) return;
+        endingQueued = true;
+        QueueDialogue("Ending");
+    }
+
     void Update()
     {
+        bool running = dialogueRunner.IsDialogueRunning;
+        if (wasDialogueRunning && !running)
+            nextRelightDialogueTime = Time.unscaledTime + 4f;
         PlayNextDialogue();
+        wasDialogueRunning = dialogueRunner.IsDialogueRunning;
     }
 
 
     public void LampRelit()
     {
         relightsSinceDarkness++;
+        PlaytestRecorder.Relight(relightsSinceDarkness, narrativeStage);
 
-        // Only check for another EarlyRelight if there are
-        // still unseen EarlyRelight nodes.
-        if (narrativeStage < earlyRelightTriggers.Length)
+        if (finalState) return;
+
+        if (narrativePath >= 0)
+        {
+            if (pathRelightStage < pathRelightTriggers.Length &&
+                relightsSinceDarkness >= pathRelightTriggers[pathRelightStage])
+            {
+                string node = pathNames[narrativePath] + "_Relight" +
+                    roomController.currentRoomState + "_" + (pathRelightStage + 1);
+                QueueDialogue(node);
+                pathRelightStage++;
+            }
+            return;
+        }
+
+        // First darkness permanently switches to the selected Let Go path.
+        if (narrativePath == -1 && narrativeStage < earlyRelightTriggers.Length)
         {
             int currentTrigger =
-                earlyRelightTriggers[narrativeStage] - relightTriggerOffset;
+                earlyRelightTriggers[narrativeStage];
 
             if (relightsSinceDarkness >= currentTrigger)
             {
                 string nodeName = "EarlyRelight" + (narrativeStage + 1);
 
-                dialogueQueue.Enqueue(nodeName);
+                QueueDialogue(nodeName);
 
                 // Advance permanently so this EarlyRelight
                 // cannot play again.
                 narrativeStage++;
+                PlaytestRecorder.Milestone(narrativeStage, nodeName);
             }
         }
     }
@@ -68,45 +105,57 @@ public class NarrativeTextController : MonoBehaviour
     {
         Debug.Log("Relights before darkness: " + relightsSinceDarkness);
 
+        // Darkness supersedes unplayed relight prompts from the previous room.
+        // Keep room/path responses, which must still be delivered in order.
+        var pending = new Queue<string>();
+        while (dialogueQueue.Count > 0)
+        {
+            string node = dialogueQueue.Dequeue();
+            if (!node.StartsWith("EarlyRelight") && !node.Contains("_Relight"))
+                pending.Enqueue(node);
+        }
+        while (pending.Count > 0) dialogueQueue.Enqueue(pending.Dequeue());
+        narrativeStage = shownNarrativeStage;
+
         // FIRST DARKNESS ONLY
         if (narrativePath == -1)
         {
             // Play the specific first-darkness response.
             if (narrativeStage == 0)
             {
-                dialogueQueue.Enqueue("DarknessLowRelight");
+                QueueDialogue("DarknessLowRelight");
             }
             else if (narrativeStage == 1)
             {
-                dialogueQueue.Enqueue("DarknessAfterEL1");
+                QueueDialogue("DarknessAfterEL1");
             }
             else if (narrativeStage == 2)
             {
-                dialogueQueue.Enqueue("DarknessAfterEL2");
+                QueueDialogue("DarknessAfterEL2");
             }
             else if (narrativeStage == 3)
             {
-                dialogueQueue.Enqueue("DarknessAfterEL3");
+                QueueDialogue("DarknessAfterEL3");
             }
             else if (narrativeStage == 4)
             {
-                dialogueQueue.Enqueue("DarknessAfterEL4");
+                QueueDialogue("DarknessAfterEL4");
             }
             else if (narrativeStage == 5)
             {
-                dialogueQueue.Enqueue("DarknessAfterEL5");
+                QueueDialogue("DarknessAfterEL5");
             }
             else if (narrativeStage == 6)
             {
-                dialogueQueue.Enqueue("DarknessAfterEL6");
+                QueueDialogue("DarknessAfterEL6");
             }
             else if (narrativeStage == 7)
             {
-                dialogueQueue.Enqueue("DarknessAfterEL7");
+                QueueDialogue("DarknessAfterEL7");
             }
             else
             {
-                dialogueQueue.Enqueue("DarknessAfterEL8");
+                QueueDialogue("DarknessAfterEL8");
             }
 
             // Lock in the long-term path.
@@ -125,6 +174,7 @@ public class NarrativeTextController : MonoBehaviour
                 narrativePath = 2;
                 Debug.Log("Narrative Path: Late Let Go");
             }
+            PlaytestRecorder.FirstDarkness(narrativePath, narrativeStage, relightsSinceDarkness, roomController.currentRoomState);
         }
 
         // ALL LATER DARKNESS EVENTS
@@ -145,28 +195,45 @@ public class NarrativeTextController : MonoBehaviour
                 nodeName = "Late_Darkness" + roomController.currentRoomState;
             }
 
-            dialogueQueue.Enqueue(nodeName);
-        }
-
-        // Preserve EarlyRelight spacing.
-        if (narrativeStage > 0)
-        {
-            relightTriggerOffset = earlyRelightTriggers[narrativeStage - 1];
+            QueueDialogue(nodeName);
         }
 
         // Reset clicks for the new room cycle.
         relightsSinceDarkness = 0;
+        pathRelightStage = 0;
+        finalState = roomController.currentRoomState == 5;
     }
 
+
+    private void QueueDialogue(string nodeName)
+    {
+        dialogueQueue.Enqueue(nodeName);
+        PlaytestRecorder.DialogueQueued(nodeName);
+    }
+
+    private string TakeNextDialogue()
+    {
+        string node = dialogueQueue.Dequeue();
+        if (node.StartsWith("EarlyRelight") &&
+            int.TryParse(node.Substring("EarlyRelight".Length), out int stage))
+        {
+            shownNarrativeStage = stage;
+        }
+        return node;
+    }
 
     private void PlayNextDialogue()
     {
         if (!dialogueRunner.IsDialogueRunning &&
             dialogueQueue.Count > 0)
         {
-            string nextNode = dialogueQueue.Dequeue();
+            string pendingNode = dialogueQueue.Peek();
+            bool isRelight = pendingNode.StartsWith("EarlyRelight") || pendingNode.Contains("_Relight");
+            if (isRelight && Time.unscaledTime < nextRelightDialogueTime) return;
+            string nextNode = TakeNextDialogue();
 
             dialogueRunner.StartDialogue(nextNode);
+            PlaytestRecorder.DialogueStarted(nextNode);
         }
     }
 }

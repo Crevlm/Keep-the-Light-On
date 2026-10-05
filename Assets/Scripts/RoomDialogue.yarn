@@ -1,4 +1,4 @@
-﻿//
+//
 // Light Clicking According to the Array
 //
 
@@ -184,4 +184,241 @@ title: Late_Darkness5
 You let go.
 
 And you're still here.
+===
+
+// Relighting after the first darkness. The selected path stays locked.
+// Three one-time prompts per room, at 5 / 10 / 15 relights; state 5 uses the ending instead.
+
+title: Early_Relight1_1
+---
+You can miss something without wanting it back.
+===
+
+title: Early_Relight1_2
+---
+Sometimes you reach for it before you remember.
+===
+
+title: Early_Relight1_3
+---
+It takes a little getting used to, doesn't it?
+===
+
+title: Early_Relight2_1
+---
+What do you find yourself remembering?
+===
+
+title: Early_Relight2_2
+---
+The little things have a way of staying with you.
+===
+
+title: Early_Relight2_3
+---
+You don't have to remember every detail for it to matter.
+===
+
+title: Early_Relight3_1
+---
+Some days you'll miss it more than others.
+===
+
+title: Early_Relight3_2
+---
+Even when you thought you were doing alright.
+===
+
+title: Early_Relight3_3
+---
+That doesn't mean you have to start over.
+===
+
+title: Early_Relight4_1
+---
+There may be things you never get to say.
+===
+
+title: Early_Relight4_2
+---
+I know. You had imagined it differently.
+===
+
+title: Early_Relight4_3
+---
+You can be grateful for what happened and wish there had been more.
+===
+
+title: Early_Relight5_1
+---
+Was that a little easier this time?
+===
+
+title: Early_Relight5_2
+---
+It's okay if you didn't think about it for a while.
+===
+
+title: Early_Relight5_3
+---
+You haven't forgotten. You're just thinking about what comes next.
+===
+
+title: Middle_Relight1_1
+---
+Part of you still wants to try again.
+===
+
+title: Middle_Relight1_2
+---
+And part of you remembers why you stopped.
+===
+
+title: Middle_Relight1_3
+---
+You don't have to pretend those feelings agree.
+===
+
+title: Middle_Relight2_1
+---
+You keep going back to the good parts.
+===
+
+title: Middle_Relight2_2
+---
+Do you miss what it was, or what you hoped it would become?
+===
+
+title: Middle_Relight2_3
+---
+I suppose it can be hard to tell.
+===
+
+title: Middle_Relight3_1
+---
+You thought you'd feel differently by now.
+===
+
+title: Middle_Relight3_2
+---
+Then something small reminds you.
+===
+
+title: Middle_Relight3_3
+---
+You can have a difficult day without taking it all back.
+===
+
+title: Middle_Relight4_1
+---
+Still thinking of something you could have done?
+===
+
+title: Middle_Relight4_2
+---
+You can spend a long time finishing a conversation that's already over.
+===
+
+title: Middle_Relight4_3
+---
+What would you say if you weren't trying to change the ending?
+===
+
+title: Middle_Relight5_1
+---
+Does feeling better feel a little like betrayal?
+===
+
+title: Middle_Relight5_2
+---
+You don't have to keep hurting to prove it mattered.
+===
+
+title: Middle_Relight5_3
+---
+What would you like to do for yourself now?
+===
+
+title: Late_Relight1_1
+---
+You weren't ready for that to be the last time.
+===
+
+title: Late_Relight1_2
+---
+Maybe you thought you'd get another chance.
+===
+
+title: Late_Relight1_3
+---
+I know. There was still so much you wanted.
+===
+
+title: Late_Relight2_1
+---
+What are you hoping will happen if you keep trying?
+===
+
+title: Late_Relight2_2
+---
+An answer? An apology?
+===
+
+title: Late_Relight2_3
+---
+Or just a reason that makes it hurt a little less?
+===
+
+title: Late_Relight3_1
+---
+You've been carrying that feeling for a long time.
+===
+
+title: Late_Relight3_2
+---
+Does it feel like the last thing you have left of it?
+===
+
+title: Late_Relight3_3
+---
+Maybe that's why putting it down feels so difficult.
+===
+
+title: Late_Relight4_1
+---
+You keep asking what you could have done differently.
+===
+
+title: Late_Relight4_2
+---
+As if finding the right answer could give it back.
+===
+
+title: Late_Relight4_3
+---
+You can wish it had stayed. You don't have to keep waiting.
+===
+
+title: Late_Relight5_1
+---
+Who would you be if you weren't holding on to this?
+===
+
+title: Late_Relight5_2
+---
+You don't have to know yet.
+===
+
+title: Late_Relight5_3
+---
+Maybe you can give yourself a chance to find out.
+===
+
+
+// After the player's final relight in State 5.
+title: Ending
+---
+What mattered still matters.
+You don't have to hold on so tightly now.
+There is more ahead of you.
 ===

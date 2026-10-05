@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "recordEditor": false,
+  "endpoint": "https://keep-the-light-on-playtests.crevlm.chatgpt.site/api/collect",
+  "collectionKey": "7c7c5cf5f7232aa507d036e68cdefa90de201103afac04b8",
+  "buildLabel": "week-4-playtest-1"
+}

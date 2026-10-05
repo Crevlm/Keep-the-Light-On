@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System.Collections;
 
@@ -36,6 +36,8 @@ public class RoomController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        gameObject.AddComponent<StateDevelopmentNotice>().Initialize(this);
+        PlaytestRecorder.BeginSession(currentRoomState);
         previousLampScale = lampLightLevel.transform.localScale.x;
 
         // Set our two reusable AudioSources
@@ -70,6 +72,12 @@ public class RoomController : MonoBehaviour
 
                 roomStates[currentRoomState].SetActive(true);
                 narrativeTextController.RoomChanged();
+                PlaytestRecorder.RoomEntered(currentRoomState);
+                if (currentRoomState == 5)
+                {
+                    var ending = gameObject.AddComponent<EndingSequence>();
+                    ending.Begin(lightController, narrativeTextController);
+                }
 
                 // Crossfade into the new state's ambience
                 if (currentRoomState < stateAmbience.Length)

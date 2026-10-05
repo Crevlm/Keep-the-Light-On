@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     //Reloads the scene after confirming the player has hit "R" key binded to Restart in the Input System. 
     public void RestartGame()
     {
+        PlaytestRecorder.EndSession("restart");
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }

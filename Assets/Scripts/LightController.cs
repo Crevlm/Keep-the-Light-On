@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
@@ -36,9 +36,19 @@ public class LightController : MonoBehaviour
 
     public NarrativeTextController narrativeTextController;
 
+    private bool finalRelightAvailable;
+    public bool FinalLightHeld { get; private set; }
+
+    public void PrepareFinalRelight()
+    {
+        finalRelightAvailable = true;
+    }
+
     public void RestoreLight()
     {
         
+        if (FinalLightHeld) return;
+        if (finalRelightAvailable) FinalLightHeld = true;
         isRestoringLight = true;
         narrativeTextController.LampRelit();
        
@@ -81,7 +91,7 @@ public class LightController : MonoBehaviour
 
             }
 
-            else
+            else if (!FinalLightHeld)
             {
                 // Move the normalized light value toward darkness.
                 lightRatio = Mathf.MoveTowards(lightRatio, 0, lightDimSpeed * Time.deltaTime);
